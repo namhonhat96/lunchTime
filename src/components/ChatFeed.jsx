@@ -1,19 +1,21 @@
 import MyMessage from './MyMessage';
 import TheirMessage from './TheirMessage';
 import MessageForm from './MessageForm';
-
+import TyperPerson from './TyperPerson';
 const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;
   const chat = chats && chats[activeChat];
+  const theirUsername = '';
+
   const renderReadReceipts = (message, isMyMessage) => chat.people.map((person, index) => person.last_read === message.id && (
-    <div
+      <div
       key={`read_${index}`}
       className="read-receipt"
       style={{
         float: isMyMessage ? 'right' : 'left',
         backgroundImage: person.person.avatar && `url(${person.person.avatar})`,
       }}
-    />
+    />    
   ));
 
   const signOut = () =>{
@@ -21,6 +23,22 @@ const ChatFeed = (props) => {
     window.location.reload();
   };
 
+  const renderTyper = () =>{
+    const keys = Object.keys(messages);
+    return keys.map((key, index) => {
+      const message = messages[key];
+      const isMyMessage = userName === message.sender.username;
+      if(isMyMessage !== false){
+        theirUsername = userName;
+      }
+      return (
+        <div>
+          <TyperPerson username={theirUsername}/>
+        </div>
+      );
+    });
+
+  }
   const renderMessages = () => {
     const keys = Object.keys(messages);
 
@@ -28,7 +46,7 @@ const ChatFeed = (props) => {
       const message = messages[key];
       const lastMessageKey = index === 0 ? null : keys[index - 1];
       const isMyMessage = userName === message.sender.username;
-
+  
       return (
         <div key={`msg_${index}`} style={{ width: '100%' }}>
           <div className="message-block">
@@ -49,7 +67,7 @@ const ChatFeed = (props) => {
   return (
     <div className="chat-feed">
        <div>
-        <button onClick={signOut}> Sign Out</button>
+        <button id="signOutBtn" onClick={signOut}> Sign Out</button>
       </div>
       <div className="chat-title-container">
         <div className="chat-title">{chat?.title}</div>
@@ -58,6 +76,7 @@ const ChatFeed = (props) => {
         </div>
       </div>
       {renderMessages()}
+      {/* {renderTyper()} */}
       <div style={{ height: '100px' }} />
       <div className="message-form-container">
         <MessageForm {...props} chatId={activeChat} />

@@ -6,6 +6,12 @@
   letter-spacing: 0.5px;
 }
 
+.ce-typer-name{
+    padding: 2px;
+    padding-left: 12px;
+    font-size: 10px;
+}
+
 .ce-chat-list {
   background-color: rgb(240, 240, 240) !important;
 }
