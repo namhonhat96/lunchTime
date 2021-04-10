@@ -10,6 +10,7 @@ const projectID = '3256361b-5f0a-417d-a70f-8ff3bf93c4d0';
 const App = () => {
   if (!localStorage.getItem('username')) return <LoginForm />;
   if( localStorage.getItem('signUp')) return <SignUpForm />;
+
   return (
     <ChatEngine
       height="100vh"
@@ -21,7 +22,4 @@ const App = () => {
     />
   );
 };
-
-// infinite scroll, logout, more customizations...
-
 export default App;

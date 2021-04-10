@@ -16,6 +16,11 @@ const ChatFeed = (props) => {
     />
   ));
 
+  const signOut = () =>{
+    localStorage.removeItem('username');
+    window.location.reload();
+  };
+
   const renderMessages = () => {
     const keys = Object.keys(messages);
 
@@ -43,6 +48,9 @@ const ChatFeed = (props) => {
 
   return (
     <div className="chat-feed">
+       <div>
+        <button onClick={signOut}> Sign Out</button>
+      </div>
       <div className="chat-title-container">
         <div className="chat-title">{chat?.title}</div>
         <div className="chat-subtitle">
