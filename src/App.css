@@ -183,7 +183,11 @@
   padding: 0px 12px;
   height: 100%;
 }
-
+.doc-button {
+  cursor: pointer;
+  padding: 0px 12px;
+  height: 100%;
+}
 .send-button {
   height: 42px;
   background-color: white;
